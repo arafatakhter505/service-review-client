@@ -1,10 +1,12 @@
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import useTitle from "./../../hooks/useTitle";
 
 const EditReview = () => {
   const review = useLoaderData();
   const navigate = useNavigate();
+  useTitle("Edit Review");
 
   const handleSubmit = (event) => {
     event.preventDefault();

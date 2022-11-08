@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
+import useTitle from "./../../hooks/useTitle";
 
 const AddService = () => {
   const [service, setService] = useState({});
+  useTitle("Add Service");
 
   const handleInputChange = (event) => {
     const field = event.target.name;

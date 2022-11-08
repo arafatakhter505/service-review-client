@@ -4,11 +4,13 @@ import { AuthContext } from "../../contexts/UserContext";
 import AddReview from "./AddReview";
 import { toast } from "react-hot-toast";
 import ReviewItem from "./ReviewItem";
+import useTitle from "./../../hooks/useTitle";
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const service = useLoaderData();
+  useTitle(`${service.name}`);
 
   const handleReviewSubmit = (event) => {
     event.preventDefault();

@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/UserContext";
 import MyReviewCard from "./MyReviewCard";
 import { toast } from "react-hot-toast";
+import useTitle from "./../../hooks/useTitle";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  useTitle("My Reviews");
 
   const handleReviewDelete = (id) => {
     const confirm = window.confirm("Are you sure delete this review");
