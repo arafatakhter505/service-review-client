@@ -6,6 +6,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Services from "../Pages/Services/Services";
 import PrivateRoute from "./PrivateRoute";
+import ServiceDetails from "./../Pages/ServiceDetails/ServiceDetails";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,12 @@ export const router = createBrowserRouter([
         path: "/services",
         element: <Services />,
         loader: async () => fetch("http://localhost:5000/services"),
+      },
+      {
+        path: "/services/:id",
+        element: <ServiceDetails />,
+        loader: async ({ params }) =>
+          fetch(`http://localhost:5000/services/${params.id}`),
       },
     ],
   },
