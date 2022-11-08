@@ -1,4 +1,5 @@
 import React from "react";
+import Choose from "./Choose";
 import Features from "./Features";
 import Hero from "./Hero";
 
@@ -7,6 +8,7 @@ const Home = () => {
     <div>
       <Hero />
       <Features />
+      <Choose />
     </div>
   );
 };
