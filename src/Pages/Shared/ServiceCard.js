@@ -13,7 +13,7 @@ const ServiceCard = ({ service }) => {
             <img
               src={imgUrl}
               alt="service"
-              className="cursor-pointer w-full h-[250px]"
+              className="cursor-pointer w-full md:h-[250px]"
             />
           </PhotoView>
         </PhotoProvider>
