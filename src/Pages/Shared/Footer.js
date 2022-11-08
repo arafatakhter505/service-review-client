@@ -7,7 +7,7 @@ const Footer = () => {
   const { user } = useContext(AuthContext);
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/homeservices")
+    fetch("https://tooth-fixers-server.vercel.app/homeservices")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);

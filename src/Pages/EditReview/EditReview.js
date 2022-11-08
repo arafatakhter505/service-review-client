@@ -11,7 +11,7 @@ const EditReview = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newReview = event.target.review.value;
-    fetch(`http://localhost:5000/reviews/${review._id}`, {
+    fetch(`https://tooth-fixers-server.vercel.app/reviews/${review._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

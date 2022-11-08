@@ -27,7 +27,7 @@ const ServiceDetails = () => {
       time: new Date(),
       review: review,
     };
-    fetch("http://localhost:5000/review", {
+    fetch("https://tooth-fixers-server.vercel.app/review", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -46,7 +46,7 @@ const ServiceDetails = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews/${service._id}`)
+    fetch(`https://tooth-fixers-server.vercel.app/reviews/${service._id}`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);

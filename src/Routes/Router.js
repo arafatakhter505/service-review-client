@@ -19,7 +19,8 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: async () => fetch("http://localhost:5000/homeservices"),
+        loader: async () =>
+          fetch("https://tooth-fixers-server.vercel.app/homeservices"),
       },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
@@ -34,13 +35,14 @@ export const router = createBrowserRouter([
       {
         path: "/services",
         element: <Services />,
-        loader: async () => fetch("http://localhost:5000/services"),
+        loader: async () =>
+          fetch("https://tooth-fixers-server.vercel.app/services"),
       },
       {
         path: "/services/:id",
         element: <ServiceDetails />,
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/services/${params.id}`),
+          fetch(`https://tooth-fixers-server.vercel.app/services/${params.id}`),
       },
       {
         path: "/myreviews",
@@ -58,7 +60,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/review/${params.id}`),
+          fetch(`https://tooth-fixers-server.vercel.app/review/${params.id}`),
       },
       {
         path: "/blog",

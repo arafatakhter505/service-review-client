@@ -13,7 +13,7 @@ const MyReviews = () => {
     const confirm = window.confirm("Are you sure delete this review");
 
     if (confirm) {
-      fetch(`http://localhost:5000/reviews/${id}`, {
+      fetch(`https://tooth-fixers-server.vercel.app/reviews/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -28,11 +28,14 @@ const MyReviews = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("tooth-fixers-token")}`,
-      },
-    })
+    fetch(
+      `https://tooth-fixers-server.vercel.app/reviews?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("tooth-fixers-token")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 401) {
           return logOut();

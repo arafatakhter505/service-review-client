@@ -32,7 +32,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Successfully login");
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://tooth-fixers-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",

@@ -16,7 +16,7 @@ const AddService = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:5000/service", {
+    fetch("https://tooth-fixers-server.vercel.app/service", {
       method: "POST",
       headers: {
         "content-type": "application/json",
