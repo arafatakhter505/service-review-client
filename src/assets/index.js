@@ -1,3 +1,4 @@
 import logo from "./logo.png";
 import login from "./login.svg";
-export { logo, login };
+import register from "./register.svg";
+export { logo, login, register };
