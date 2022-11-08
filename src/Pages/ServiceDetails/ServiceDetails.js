@@ -1,10 +1,58 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../contexts/UserContext";
+import AddReview from "./AddReview";
+import { toast } from "react-hot-toast";
+import ReviewItem from "./ReviewItem";
 
 const ServiceDetails = () => {
+  const { user } = useContext(AuthContext);
+  const [reviews, setReviews] = useState([]);
   const service = useLoaderData();
+
+  const handleReviewSubmit = (event) => {
+    event.preventDefault();
+    if (!user?.uid) {
+      return toast.error("Please login to add a review");
+    }
+    const review = event.target.review.value;
+    const newReview = {
+      name: user.displayName,
+      email: user.email,
+      img: user.photoURL,
+      serviceId: service._id,
+      time: new Date(),
+      review: review,
+    };
+    fetch("http://localhost:5000/review", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newReview),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Successfully new review add");
+          event.target.reset();
+          setReviews([newReview, ...reviews]);
+        }
+      })
+      .catch((e) => toast.error(e.message));
+  };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/reviews/${service._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+      })
+      .catch((e) => toast.error(e.message));
+  }, [service._id]);
   return (
     <div className="lg:px-20 md:px-8 px-6 my-12">
+      {/* service section */}
       <div className="card lg:card-side bg-base-100 shadow-xl border">
         <figure className="lg:w-1/2">
           <img src={service.imgUrl} alt="service" className="w-full h-[100%]" />
@@ -18,6 +66,23 @@ const ServiceDetails = () => {
             </span>
           </div>
         </div>
+      </div>
+
+      {/* review section */}
+      <div className="my-20">
+        <h2 className="text-4xl font-semibold text-center text-blue-600 mb-6">
+          User Reviews
+        </h2>
+        {reviews.length > 0 ? (
+          reviews.map((review) => (
+            <ReviewItem key={review._id} reviewItem={review} />
+          ))
+        ) : (
+          <p className="text-center">No Reviews</p>
+        )}
+      </div>
+      <div className="my-20">
+        <AddReview handleReviewSubmit={handleReviewSubmit} />
       </div>
     </div>
   );
