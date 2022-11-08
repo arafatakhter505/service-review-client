@@ -86,14 +86,14 @@ const Navbar = () => {
         {user?.uid ? (
           <button
             onClick={handleLogOut}
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-white hover:text-blue-800 border hover:border-blue-600 transition-all"
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-white hover:text-blue-800 border border-blue-600 transition-all"
           >
             Log Out
           </button>
         ) : (
           <Link
             to={"/login"}
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-white hover:text-blue-800 border hover:border-blue-600 transition-all"
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-white hover:text-blue-800 border border-blue-600 transition-all"
           >
             Login
           </Link>
