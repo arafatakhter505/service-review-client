@@ -7,7 +7,7 @@ const AddReview = ({ handleReviewSubmit }) => {
       <form onSubmit={handleReviewSubmit}>
         <textarea
           name="review"
-          className="textarea textarea-bordered w-1/2 h-[200px] mb-3"
+          className="textarea textarea-bordered md:w-1/2 w-full h-[200px] mb-3"
           placeholder="Your review"
           required
         ></textarea>
