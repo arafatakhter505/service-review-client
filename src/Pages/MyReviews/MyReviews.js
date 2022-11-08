@@ -40,7 +40,7 @@ const MyReviews = () => {
         return res.json();
       })
       .then((data) => setReviews(data));
-  }, [user?.email]);
+  }, [user?.email, logOut]);
 
   return (
     <div className="lg:px-20 md:px-8 px-6 md:min-h-[200px] min-h-screen my-12">
