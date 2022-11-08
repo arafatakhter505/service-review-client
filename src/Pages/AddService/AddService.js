@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const AddService = () => {
+  const [service, setService] = useState({});
+
+  const handleInputChange = (event) => {
+    const field = event.target.name;
+    const value = event.target.value;
+    const newService = { ...service };
+    newService[field] = value;
+    setService(newService);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("http://localhost:5000/service", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(service),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Successfully service add");
+          event.target.reset();
+        }
+      })
+      .catch((e) => toast.error(e.message));
+  };
+
   return (
     <div className="lg:px-64 md:px-8 px-6 my-12">
       <h2 className="md:text-5xl text-4xl md:text-left text-center font-semibold text-blue-600">
         Add New Service
       </h2>
       <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 mt-12">
-        <div className="card-body">
+        <form onSubmit={handleSubmit} className="card-body">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Service Name</span>
@@ -15,6 +45,7 @@ const AddService = () => {
             <input
               type="text"
               name="name"
+              onChange={handleInputChange}
               placeholder="service name"
               className="input input-bordered"
               required
@@ -27,6 +58,7 @@ const AddService = () => {
             <input
               type="text"
               name="imgUrl"
+              onChange={handleInputChange}
               placeholder="image url"
               className="input input-bordered"
               required
@@ -37,8 +69,9 @@ const AddService = () => {
               <span className="label-text">Price</span>
             </label>
             <input
-              type="text"
+              type="number"
               name="price"
+              onChange={handleInputChange}
               placeholder="price"
               className="input input-bordered"
               required
@@ -50,6 +83,7 @@ const AddService = () => {
             </label>
             <textarea
               name="description"
+              onChange={handleInputChange}
               className="textarea textarea-bordered"
               placeholder="description"
               required
@@ -63,7 +97,7 @@ const AddService = () => {
               Submit
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
