@@ -21,11 +21,6 @@ const MyReviews = () => {
       });
   };
 
-  const handleReviewEdit = (event) => {
-    event.preventDefault();
-    console.log(event.target.review.value);
-  };
-
   useEffect(() => {
     fetch(`http://localhost:5000/reviews?email=${user?.email}`)
       .then((res) => res.json())
@@ -41,7 +36,6 @@ const MyReviews = () => {
               key={review._id}
               review={review}
               handleReviewDelete={handleReviewDelete}
-              handleReviewEdit={handleReviewEdit}
             />
           ))}
         </div>
