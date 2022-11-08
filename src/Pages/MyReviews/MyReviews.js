@@ -8,17 +8,21 @@ const MyReviews = () => {
   const [reviews, setReviews] = useState([]);
 
   const handleReviewDelete = (id) => {
-    fetch(`http://localhost:5000/reviews/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          const remaining = reviews.filter((review) => review._id !== id);
-          setReviews(remaining);
-          toast.success("Successfully delete");
-        }
-      });
+    const confirm = window.confirm("Are you sure delete this review");
+
+    if (confirm) {
+      fetch(`http://localhost:5000/reviews/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            const remaining = reviews.filter((review) => review._id !== id);
+            setReviews(remaining);
+            toast.success("Successfully delete");
+          }
+        });
+    }
   };
 
   useEffect(() => {

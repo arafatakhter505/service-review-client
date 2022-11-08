@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "./../Pages/ServiceDetails/ServiceDetails";
 import MyReviews from "./../Pages/MyReviews/MyReviews";
 import EditReview from "./../Pages/EditReview/EditReview";
+import Blog from "../Pages/Blog/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
         ),
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/review/${params.id}`),
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
       },
     ],
   },

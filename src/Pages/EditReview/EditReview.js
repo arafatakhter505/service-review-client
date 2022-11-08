@@ -31,7 +31,7 @@ const EditReview = () => {
     <div className="lg:px-20 md:px-8 px-6 my-12">
       <form
         onSubmit={handleSubmit}
-        className="w-[500px] mx-auto shadow-lg border p-6 rounded"
+        className="md:w-[500px] mx-auto shadow-lg border p-6 rounded"
       >
         <h2 className="text-xl font-semibold mb-4">
           Edit {review.serviceName} Service Review
