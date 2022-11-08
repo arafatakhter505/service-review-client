@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { logo } from "../../assets";
+import { AuthContext } from "../../contexts/UserContext";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => toast.success("Successfully logout"))
+      .catch((e) => toast.error(e.message));
+  };
+
   return (
     <div className="navbar bg-base-100 lg:px-20 md:px-8 shadow sticky top-0 z-50">
       <div className="navbar-start">
@@ -33,6 +43,16 @@ const Navbar = () => {
             <li>
               <Link to={"/blog"}>Blog</Link>
             </li>
+            {user?.uid && (
+              <>
+                <li>
+                  <Link to={"/myreviews"}>My Reviews</Link>
+                </li>
+                <li>
+                  <Link to={"/addservice"}>Add Service</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <Link to={"/"} className="flex items-center">
@@ -50,15 +70,34 @@ const Navbar = () => {
           <li>
             <Link to={"/blog"}>Blog</Link>
           </li>
+          {user?.uid && (
+            <>
+              <li>
+                <Link to={"/myreviews"}>My Reviews</Link>
+              </li>
+              <li>
+                <Link to={"/addservice"}>Add Service</Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <div className="navbar-end">
-        <Link
-          to={"/login"}
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-white hover:text-blue-800 border hover:border-blue-600 transition-all"
-        >
-          Login
-        </Link>
+        {user?.uid ? (
+          <button
+            onClick={handleLogOut}
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-white hover:text-blue-800 border hover:border-blue-600 transition-all"
+          >
+            Log Out
+          </button>
+        ) : (
+          <Link
+            to={"/login"}
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-white hover:text-blue-800 border hover:border-blue-600 transition-all"
+          >
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
