@@ -1,39 +1,8 @@
-import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-import { AuthContext } from "./../../contexts/UserContext";
-import { toast } from "react-hot-toast";
 
-const LoginForm = () => {
-  const { googleLogin, logIn } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
-  // google
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then(() => {
-        toast.success("Successfully login");
-        navigate(from, { replace: true });
-      })
-      .catch((e) => toast.error(e.message));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    logIn(email, password)
-      .then(() => {
-        toast.success("Successfully login");
-        navigate(from, { replace: true });
-        form.reset();
-      })
-      .catch((e) => toast.error(e.message));
-  };
-
+const LoginForm = ({ handleSubmit, handleGoogleLogin }) => {
   return (
     <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
       <form onSubmit={handleSubmit} className="card-body">

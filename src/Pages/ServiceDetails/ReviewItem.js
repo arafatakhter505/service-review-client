@@ -2,7 +2,6 @@ import React from "react";
 
 const ReviewItem = ({ reviewItem }) => {
   const { name, img, review } = reviewItem;
-  console.log("hello", img);
   return (
     <div className="border p-4 rounded mb-3 shadow">
       <div className="flex items-center mb-3">
